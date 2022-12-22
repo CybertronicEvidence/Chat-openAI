@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+      integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc"
+      crossorigin="anonymous"
+    />
+    <title>Chat with OpenAI</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700&display=swap");
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: rgb(254, 219, 170);
+        color: rgb(5, 13, 15);
+        font-family: "Syne", sans-serif;
+        font-size: 16px;
+        /* min-height: 100vh; */
+        /* overflow: none; */
+      }
+
+      .container {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 0 30px;
+      }
+
+      .navbar {
+        background: rgb(15, 37, 45);
+        color: #fff;
+        height: 100px;
+      }
+
+      .logo img {
+        width: 50px;
+      }
+
+      .nav {
+        display: flex;
+        list-style-type: none;
+      }
+
+      .nav a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 18px;
+      }
+
+      .navbar .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+      }
+
+      .navbar ul {
+        display: flex;
+      }
+
+      .navbar ul li {
+        margin-left: 20px;
+      }
+      .section {
+        margin-top: 100px;
+        margin-bottom: 170px;
+      }
+      .section .container {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 20px;
+        color: #fff;
+        background: rgb(15, 37, 45);
+        border-radius: 5px;
+      }
+
+      .chat-log {
+        height: 300px;
+        overflow: auto;
+        border: 5px solid #fff;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+      .chat-log p {
+        font-size: 32px;
+        margin: 0;
+      }
+      .input-form {
+        display: flex;
+      }
+      .input-text {
+        flex: 1;
+        padding: 10px;
+        border: 0px solid #ccc;
+        outline: none;
+        height: 60px;
+        font-size: 1.5rem;
+      }
+      .input-button {
+        padding: 10px;
+        background-color: #fff;
+        /* color: #fff; */
+        /* border: 1px solid #ccc; */
+        cursor: pointer;
+        outline: none;
+        border: none;
+        font-size: 2rem;
+      }
+      .input-button:hover {
+        background-color: #ddd;
+      }
+      .you {
+        background: #fff;
+        color: #000;
+        padding: 10px;
+        /* margin-bottom: 100px; */
+      }
+
+      /* Footer */
+      .footer {
+        background: rgb(15, 37, 45);
+        color: #fff;
+        /* position: absolute;
+      bottom: 0; */
+      }
+
+      .footer .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        /* background: rgb(15, 37, 45); */
+      }
+
+      .text {
+        flex: 1;
+        color: #fff;
+        border-radius: 10px;
+        margin: 20px 10px;
+        padding: 15px 20px;
+      }
+
+      .footer .logo {
+        margin-top: 20px;
+        padding-top: 15px;
+      }
+
+      .footer li {
+        list-style-type: none;
+      }
+
+      @media (max-width: 1080px) {
+        .section .container {
+          max-width: 1080px;
+          /* flex-direction: column;
+          padding-top: 20px;
+          text-align: center; */
+        }
+        .section {
+          margin-top: 300px;
+        }
+        .footer .container {
+          display: block;
+          /* flex-direction: column; */
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NavBar -->
+    <div class="navbar">
+      <div class="container">
+        <div class="logo">
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/62264d40f0779c075cdb1c25/98178dce-6636-4ce7-9382-71933a99f575/Diamond-triple_D-%28peach%29.png?format=1500w"
+            alt="triple-D"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <div class="chat-log">
+          {% if input_text %}
+          <p class="you">{{ input_text }}</p>
+          <br />
+          <p>{{ response_text }}</p>
+          {% endif %}
+        </div>
+        <form action="/send" method="post" class="input-form">
+          <input type="text" name="input_text" class="input-text" autofocus />
+          <button type="submit" class="input-button">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+          <!-- <i
+            id="chat-icon"
+            style="color: #fff"
+            class="fa fa-fw fa-send"
+            onclick="sendButton()"
+          ></i> -->
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="container">
+        <div class="text">
+          <h2>Diamond</h2>
+          <p>345 Adelaide Street W. Suite 600 Toronto, ON M5V 1R5</p>
+          <br />
+          <p>450 Lexington Ave 4th Floor New York, NY 10017</p>
+        </div>
+
+        <div class="text">
+          <h2>Information</h2>
+          <li>About</li>
+          <li>Work</li>
+          <li>Services</li>
+          <li>Careers</li>
+          <li>Contact</li>
+          <li>Privacy Policy</li>
+          <li>Terms and Conditions</li>
+        </div>
+
+        <div class="text">
+          <h2>Services</h2>
+          <li>Advertising</li>
+          <li>Design</li>
+          <li>Digital</li>
+          <li>Influencer</li>
+          <li>XM + Events</li>
+          <li>Partnerships</li>
+          <li>Video</li>
+          <li>Research</li>
+        </div>
+
+        <div class="logo">
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/62264d40f0779c075cdb1c25/98178dce-6636-4ce7-9382-71933a99f575/Diamond-triple_D-%28peach%29.png?format=1500w"
+            alt="triple-D"
+          />
+        </div>
+      </div>
+    </div>
+
+    <script></script>
+  </body>
+</html>
