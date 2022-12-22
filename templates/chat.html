@@ -75,11 +75,11 @@
         margin-bottom: 170px;
       }
       .section .container {
-        max-width: 1080px;
+        max-width: 840px;
         margin: 0 auto;
         padding: 20px;
         color: #fff;
-        background: rgb(15, 37, 45);
+        background: #fff;
         border-radius: 5px;
       }
 
@@ -92,29 +92,42 @@
         margin-bottom: 10px;
       }
       .chat-log p {
-        font-size: 32px;
+        color: #555;
+        font-size: 1rem;
         margin: 0;
       }
       .input-form {
         display: flex;
+        border: 1px solid #ccc;
+        color: #555;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+        outline: none;
+        height: 50px;
       }
       .input-text {
         flex: 1;
         padding: 10px;
-        border: 0px solid #ccc;
+        /* border: 1px solid #ccc; */
+        /* border-radius: 10px; */
         outline: none;
-        height: 60px;
-        font-size: 1.5rem;
+        border: none;
+        color: #555;
+        /* height: 50px; */
+        font-size: 1rem;
+        /* box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2); */
       }
       .input-button {
-        padding: 10px;
+        padding: 0px;
         background-color: #fff;
         /* color: #fff; */
         /* border: 1px solid #ccc; */
         cursor: pointer;
         outline: none;
         border: none;
-        font-size: 2rem;
+        font-size: 1rem;
+        margin-right: 5px;
       }
       .input-button:hover {
         background-color: #ddd;
@@ -122,8 +135,11 @@
       .you {
         background: #fff;
         color: #000;
-        padding: 10px;
+        /* padding: 10px; */
         /* margin-bottom: 100px; */
+      }
+      .response {
+        line-height: 1.5;
       }
 
       /* Footer */
@@ -195,13 +211,13 @@
           {% if input_text %}
           <p class="you">{{ input_text }}</p>
           <br />
-          <p>{{ response_text }}</p>
+          <p class="response">{{ response_text }}</p>
           {% endif %}
         </div>
         <form action="/send" method="post" class="input-form">
           <input type="text" name="input_text" class="input-text" autofocus />
           <button type="submit" class="input-button">
-            <i class="fas fa-paper-plane"></i>
+            <i class="fas fa-paper-plane" style="color: #555"></i>
           </button>
           <!-- <i
             id="chat-icon"
